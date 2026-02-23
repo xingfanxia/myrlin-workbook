@@ -6211,6 +6211,10 @@ function startServer(port = 3456, host = '127.0.0.1') {
   const { ptyWss, ptyManager } = attachPtyWebSocket(server);
   _ptyManager = ptyManager;
 
+  // Attach Mobile WebSocket bridge
+  const { attachMobileWebSocket } = require('./mobile-bridge');
+  attachMobileWebSocket(server);
+
   // Cleanup tunnels and PTY sessions on shutdown
   const cleanup = () => {
     if (_ptyManager) {
