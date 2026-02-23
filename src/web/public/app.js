@@ -3335,7 +3335,7 @@ class CWMApp {
       { key: 'maxConcurrentTasks', label: 'Max Concurrent Tasks', description: 'Maximum number of worktree tasks that can run simultaneously (1-8)', category: 'Advanced', type: 'number', min: 1, max: 8 },
       { key: 'defaultModelPlanning', label: 'Default Model (Planning)', description: 'Auto-assign when tasks enter Planning. Haiku is fast/cheap for exploration. Only applies to tasks without a model set.', category: 'Advanced', type: 'select', options: [{ value: '', label: 'None' }, { value: 'claude-haiku-4-5-20251001', label: 'Haiku (fast, cheap)' }, { value: 'claude-sonnet-4-6', label: 'Sonnet (balanced)' }, { value: 'claude-opus-4-6', label: 'Opus (thorough)' }] },
       { key: 'defaultModelRunning', label: 'Default Model (Running)', description: 'Auto-assign when tasks enter Running. Sonnet balances speed and quality for implementation. Only applies to tasks without a model set.', category: 'Advanced', type: 'select', options: [{ value: '', label: 'None' }, { value: 'claude-haiku-4-5-20251001', label: 'Haiku (fast, cheap)' }, { value: 'claude-sonnet-4-6', label: 'Sonnet (balanced)' }, { value: 'claude-opus-4-6', label: 'Opus (thorough)' }] },
-      { key: 'cfNamedTunnel', label: 'Cloudflare Named Tunnel', description: 'Expose Myrlin on the internet via your own domain. Requires cloudflared CLI and a Cloudflare Zero Trust tunnel token.', category: 'Remote Access', type: 'tunnel' },
+      { key: 'cfNamedTunnel', label: 'Cloudflare Named Tunnel', description: 'Expose Myrlin on the internet via your own domain. Go to one.dash.cloudflare.com → Networks → Tunnels → Create a tunnel, then copy the token from the install command (the long eyJ… string).', category: 'Remote Access', type: 'tunnel' },
     ];
   }
 
@@ -3886,9 +3886,15 @@ class CWMApp {
                 <div class="settings-row-desc">${this.escapeHtml(item.description)}</div>
               </div>
               <div id="named-tunnel-status" style="font-size:11px;font-family:monospace;opacity:0.65;">checking...</div>
+              <ol style="font-size:11px;opacity:0.55;margin:2px 0 4px 16px;padding:0;line-height:1.7;">
+                <li>Open <a href="https://one.dash.cloudflare.com/" target="_blank" rel="noopener" style="color:inherit;">one.dash.cloudflare.com</a> → Networks → Tunnels</li>
+                <li>Create a tunnel → Cloudflared → copy the <code style="font-size:10px;">eyJ…</code> token → paste below → Save</li>
+                <li>Add a public hostname: subdomain of your choice, your domain, Type <code style="font-size:10px;">HTTP</code>, URL <code style="font-size:10px;">localhost:3456</code></li>
+                <li>Click Start below (or enable Auto-start)</li>
+              </ol>
               <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;width:100%;">
                 <input type="password" id="named-tunnel-token-input" autocomplete="off"
-                  placeholder="Paste Cloudflare tunnel token"
+                  placeholder="eyJ… token from Cloudflare dashboard"
                   style="flex:1;min-width:180px;font-size:12px;padding:4px 8px;background:var(--input-bg,#1e1e2e);border:1px solid var(--border,#444);border-radius:4px;color:inherit;" />
                 <button id="named-tunnel-save-btn" style="font-size:12px;padding:4px 10px;border-radius:4px;border:1px solid var(--border,#555);background:var(--btn-bg,#313244);color:inherit;cursor:pointer;">Save</button>
               </div>
