@@ -44,9 +44,8 @@ function attachPtyWebSocket(httpServer) {
   httpServer.on('upgrade', (request, socket, head) => {
     const { pathname, query } = url.parse(request.url, true);
 
-    // Only handle /ws/terminal upgrades
+    // Only handle /ws/terminal upgrades — let other handlers claim remaining paths
     if (pathname !== '/ws/terminal') {
-      socket.destroy();
       return;
     }
 
