@@ -1793,6 +1793,38 @@ function calculateSessionCost(jsonlPath) {
 }
 
 /**
+ * GET /api/sessions/:id/history
+ * Returns raw JSONL lines for the session's Claude conversation so mobile
+ * clients can replay history on screen without re-running --resume.
+ *
+ * Response: { lines: string[], resumeSessionId: string|null }
+ * Each line is one stream-json object (same format the mobile bridge emits).
+ * Returns { lines: [] } if no JSONL found (new session, not an error).
+ */
+app.get('/api/sessions/:id/history', requireAuth, (req, res) => {
+  const store = getStore();
+  const session = store.getSession(req.params.id);
+  const resumeId = (session && session.resumeSessionId) || null;
+
+  if (!resumeId) {
+    return res.json({ lines: [], resumeSessionId: null });
+  }
+
+  const jsonlPath = findJsonlFile(resumeId);
+  if (!jsonlPath) {
+    return res.json({ lines: [], resumeSessionId: resumeId });
+  }
+
+  try {
+    const content = fs.readFileSync(jsonlPath, 'utf-8');
+    const lines = content.split('\n').filter(l => l.trim().length > 0);
+    return res.json({ lines, resumeSessionId: resumeId });
+  } catch (err) {
+    return res.json({ lines: [], resumeSessionId: resumeId });
+  }
+});
+
+/**
  * GET /api/sessions/:id/cost
  * Reads the session's JSONL file and calculates token usage and estimated cost.
  * Results are cached for 60 seconds, invalidated when the file mtime changes.
