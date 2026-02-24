@@ -1,31 +1,30 @@
 # Session Handoff
 
-**Last Updated:** 2026-02-23 18:36:45
-**Trigger:** context-50pct-76118
+**Last Updated:** 2026-02-24 07:57:19
+**Trigger:** precompact
 **Session ID:** default
 
 ## Git State
 
 - **Directory:** /Users/xingfanxia/projects/forks/myrlin-workbook
 - **Branch:** feat/ios-mobile-bridge
-- **Status:** 2 uncommitted changes
-- **Last Commit:** 79c00aa docs: add comprehensive Myrlin web GUI feature inventory audit
+- **Status:** 1 uncommitted changes
+- **Last Commit:** a6a8738 feat: GET /api/sessions/:id/history — serve JSONL lines for mobile history replay
 
 ### Modified Files
 - andoffs/HANDOFF.md
-- memory/audit-gap-analysis.md
 
 ### Recent Commits
-- 79c00aa docs: add comprehensive Myrlin web GUI feature inventory audit
-- 65c74fa docs: clarify mobile-bridge architecture in comments
-- 1c94bc1 docs: add comprehensive iOS feature inventory from codebase audit
-- 3471af1 feat(mobile): add WebSocket bridge for mobile Claude connections
-- 85a2b76 feat: add Cloudflare named tunnel integration (token-based, persistent domain)
+- a6a8738 feat: GET /api/sessions/:id/history — serve JSONL lines for mobile history replay
+- 5dae3b7 chore: update handoff state and audit gap analysis notes
+- ae267a0 docs: add comprehensive Myrlin web GUI feature inventory audit
+- b0cf5f4 docs: clarify mobile-bridge architecture in comments
+- 1998bdc docs: add comprehensive iOS feature inventory from codebase audit
 
 ### Diff Summary
 ```
-handoffs/HANDOFF.md | 26 +++++++++-----------------
- 1 file changed, 9 insertions(+), 17 deletions(-)
+handoffs/HANDOFF.md | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 ```
 
 ---
